@@ -10,7 +10,7 @@ public class SimulatedAnnealing{
         LinkedList<Integer> tour = new LinkedList<Integer>();
         PriorityQueue<Node> queue = new PriorityQueue<>();
         HashMap<Integer, PriorityQueue<Node>> entryMap = new HashMap<>();
-        int start = new Random().nextInt(adjacencyList.size());
+        int start = new Random().nextInt(adjacencyList.size()-1);
         tour.add(start);
         populateEdges(start, adjacencyList, tour, queue);
         int nextNode = queue.poll().node;
@@ -41,20 +41,23 @@ public class SimulatedAnnealing{
                 {
                     queue.add(new Node(key,value));
                 }
-            }
-            else
-            {
-                Node node = findNodeInQueue(queue,key,value);
-                if(node.weight > value)
+
+                else
                 {
-                    queue.remove(key);
-                    queue.add(new Node(key,value));
+
+                    Node node = findNodeInQueue(queue,key,value);
+                    if(node.weight > value)
+                    {
+                        queue.remove(key);
+                        queue.add(new Node(key,value));
+                    }
                 }
             }
         }
     }
 
     private Node findNodeInQueue(PriorityQueue<Node> queue, int key, double value) {
+
 
         for(Node node: queue)
         {
@@ -70,17 +73,18 @@ public class SimulatedAnnealing{
     public Edge getEdgeWhereNextNodeIsInserted(int nextNode,
                                                     HashMap<Integer,HashMap<Integer,Double>> adjacencyList, LinkedList<Integer> tour)
     {
-        Double minWeight = Double.MIN_VALUE;
+        Double minWeight = Double.MAX_VALUE;
         Edge edge = null;
         for(int i=0; i < tour.size() -1; i++)
         {
-            if(adjacencyList.get(nextNode).get(i) +
-                    adjacencyList.get(nextNode).get(i+1) - adjacencyList.get(i).get(i+1)
+            System.out.println(i + " " + adjacencyList.get(1).get(0));
+            if(adjacencyList.get(nextNode).get(tour.get(i)) +
+                    adjacencyList.get(nextNode).get(tour.get(i+1)) - adjacencyList.get(tour.get(i)).get(tour.get(i+1))
                     < minWeight)
             {
-                minWeight = adjacencyList.get(nextNode).get(i) +
-                        adjacencyList.get(nextNode).get(i+1) - adjacencyList.get(i).get(i+1);
-                edge = new Edge(i,i+1);
+                minWeight = adjacencyList.get(nextNode).get(tour.get(i)) +
+                        adjacencyList.get(nextNode).get(tour.get(i+1)) - adjacencyList.get(tour.get(i)).get(tour.get(i+1));
+                edge = new Edge(tour.get(i),tour.get(i+1));
             }
         }
         return edge;
@@ -93,12 +97,12 @@ public class SimulatedAnnealing{
 
         Double bestCost = Double.MAX_VALUE;
         LinkedList<Integer> bestTourPath = null;
-        Double temperature = 10000.00;
-        Double coolingRate = 0.00001;
+        Double temperature = 100.00;
+        Double coolingRate = 0.5;
 
         LinkedList<Integer> tourPathSoFar = getInititalTourUsingFurthestInsertion(adjacencyList);
 
-        Double tourCostSoFar = calcTspCost(bestTourPath,adjacencyList);
+        Double tourCostSoFar = calcTspCost(tourPathSoFar,adjacencyList);
         bestCost = tourCostSoFar;
         bestTourPath = tourPathSoFar;
 
@@ -106,8 +110,19 @@ public class SimulatedAnnealing{
 
         while(temperature > 1)
         {
+
             LinkedList<Integer> tour = tourPathSoFar;
-            twoOpt.performKOptTour(tour,2);
+            System.out.print("Tour before: ");
+            for (int i = 0; i<tour.size(); i++) {
+                System.out.print(tour.get(i) + ", ");
+            }
+            System.out.println();
+            tour = twoOpt.performKOptTour(tour,2);
+            System.out.print("Tour after two opt: ");
+            for (int i = 0; i<tour.size(); i++) {
+                System.out.print(tour.get(i) + ", ");
+            }
+            System.out.println();
             Double tourCost = calcTspCost(tour, adjacencyList);
             if(tourCost <= tourCostSoFar)
             {
@@ -116,6 +131,7 @@ public class SimulatedAnnealing{
             }
             else
             {
+                System.out.println("going inside calcaceepr");
                 if(calculateAcceptanceProbability(tourCostSoFar,tourCost, temperature) >
                         new Random().nextDouble()) {
                     tourPathSoFar = tour;
@@ -131,12 +147,14 @@ public class SimulatedAnnealing{
 
             temperature = temperature - temperature*coolingRate;
 
-            if(System.nanoTime() - startTime == 60000000000L)
+            if(System.nanoTime() - startTime == 540000000000L)
             {
                 System.out.println("Simulated Annhealing taking too much time. Exiting with the best found so far");
                 print(bestCost, bestTourPath);
                 return 0.0;
             }
+            System.out.println("Iteration complete:");
+            print(tourCost, tour);
         }
         print(bestCost, bestTourPath);
         return 0.0;
@@ -145,8 +163,14 @@ public class SimulatedAnnealing{
     private Double calcTspCost(LinkedList<Integer> tourPathSoFar, HashMap<Integer, HashMap<Integer, Double>> adjacencyList) {
 
         Double tspCost = 0.0;
-        for(int i=0; i < tourPathSoFar.size() -1 ; i++)
+//        System.out.print("Tour: ");
+//        for (int i = 0; i<tourPathSoFar.size(); i++) {
+//            System.out.print(tourPathSoFar.get(i) + ", ");
+//        }
+//        System.out.println();
+        for(int i=0; i < tourPathSoFar.size()-1 ; i++)
         {
+            System.out.println("hi " + tourPathSoFar.get(i) + "- " + tourPathSoFar.get(i+1));
             tspCost+= adjacencyList.get(tourPathSoFar.get(i)).get(tourPathSoFar.get(i+1));
         }
         if(tourPathSoFar.getFirst() != tourPathSoFar.getLast())
