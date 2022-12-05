@@ -2,6 +2,8 @@ import java.util.*;
 
 public class SimulatedAnnealing{
 
+    TwoOpt twoOpt = new TwoOpt();
+
     public LinkedList<Integer> getInititalTourUsingFurthestInsertion(HashMap<Integer, HashMap<Integer,Double>>
                                                                              adjacencyList)
     {
@@ -105,7 +107,7 @@ public class SimulatedAnnealing{
         while(temperature > 1)
         {
             LinkedList<Integer> tour = tourPathSoFar;
-            performKOptTour(tour,2);
+            twoOpt.performKOptTour(tour,2);
             Double tourCost = calcTspCost(tour, adjacencyList);
             if(tourCost <= tourCostSoFar)
             {
