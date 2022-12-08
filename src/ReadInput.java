@@ -10,12 +10,12 @@ public class ReadInput {
 
         HashMap<Integer, HashMap<Integer,Double>> adjacencyList = new HashMap<>();
 
-        File dir = new File("D:/Simran/projects and misc/AI_TSP_Project/src/resources/Competion");
+        File dir = new File("D:/Madhura/UCI/Courses Fall 22/AI/AI Project (TSP)/AI_TSP_Project/src/resources/Competion");
         File[] files = dir.listFiles();
         // Fetching all the files
         for (File file : files) {
             String name = file.getName();
-            if(file.isFile() && name.contains("tsp-problem-")) {
+            if(file.isFile() && name.contains("tsp-problem-25-6-100-5-1")) {
                 BufferedReader inputStream = null;
                 String line;
                 int numOfLocations = 0;

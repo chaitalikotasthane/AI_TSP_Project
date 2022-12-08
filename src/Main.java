@@ -47,9 +47,10 @@ public class Main {
         long startTime = System.nanoTime();
 
         SimulatedAnnealing sc = new SimulatedAnnealing();
-        sc.tspUsingSimulatedAnnealing(
-                adjacencyList, startTime);
+        sc.tspUsingSimulatedAnnealing(adjacencyList, startTime);
 
+        BranchAndBound bb = new BranchAndBound();
+        bb.tsp();
     }
 
 
