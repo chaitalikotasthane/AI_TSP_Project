@@ -10,7 +10,7 @@ public class ReadInput {
 
         HashMap<Integer, HashMap<Integer,Double>> adjacencyList = new HashMap<>();
 
-        File dir = new File("D:/Madhura/UCI/Courses Fall 22/AI/AI Project (TSP)/AI_TSP_Project/src/resources/Competion");
+        File dir = new File("D:/CodingPracs/AI_TSP_Project/src/resources/Competion");
         File[] files = dir.listFiles();
         // Fetching all the files
         for (File file : files) {
@@ -42,7 +42,6 @@ public class ReadInput {
                         inputStream.close();
                     }
                 }
-//                System.out.println(adjacencyList);
             }
         }
         return adjacencyList;

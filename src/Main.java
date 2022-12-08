@@ -11,28 +11,6 @@ public class Main {
         HashMap<Integer, HashMap<Integer,Double>>
                 adjacencyList = new HashMap<>();
 
-        // Adding edges one by one
-//        addEdge(adjacencyList, 0, 1, 10);
-//        addEdge(adjacencyList, 0, 2, 15);
-//        addEdge(adjacencyList, 0, 3, 20);
-//
-//        addEdge(adjacencyList, 1, 0, 5);
-//        addEdge(adjacencyList, 1, 2, 9);
-//        addEdge(adjacencyList, 1, 3, 10);
-//
-//        addEdge(adjacencyList, 2, 0, 6);
-//        addEdge(adjacencyList, 2, 1, 13);
-//        addEdge(adjacencyList, 2, 3, 12);
-//
-//        addEdge(adjacencyList, 3, 0, 8);
-//        addEdge(adjacencyList, 3, 1, 8);
-//        addEdge(adjacencyList, 3, 2, 9);
-
-        //addEdge(adjacencyList, 4, 0, 8);
-        //addEdge(adjacencyList, 4, 1, 2);
-        //addEdge(adjacencyList, 4, 2, 20);
-        //addEdge(adjacencyList, 4, 3, 4);
-
         ReadInput readInput = new ReadInput();
         try {
             adjacencyList = readInput.readCompetitionFiles();
@@ -46,14 +24,24 @@ public class Main {
 
         long startTime = System.nanoTime();
 
+        System.out.println("------------------Simulating TSP using SLS(Simulated Annealing) ------------------------");
         SimulatedAnnealing sc = new SimulatedAnnealing();
         sc.tspUsingSimulatedAnnealing(adjacencyList, startTime);
-
-        BranchAndBound bb = new BranchAndBound();
-        bb.tsp();
+        System.out.println();
+        System.out.println("------------------Simulating TSP using Branch and Bound ------------------------");
+        //BranchAndBound bb = new BranchAndBound();
+        //bb.tsp();
     }
 
 
+    /*
+   Function to addEdge for creation of adjacencyList
+   Inputs:
+   adjacencyList
+   node1
+   node2
+   cost
+    */
     static void addEdge(HashMap<Integer, HashMap<Integer, Double>> adj,
                         int u, int v, double cost)
     {
