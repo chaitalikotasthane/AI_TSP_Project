@@ -37,20 +37,13 @@ public class SimulatedAnnealing{
             Double value = entry.getValue();
             if(!tour.contains(key))
             {
-                if(!queue.contains(key))
-                {
+                Node node = findNodeInQueue(queue,key,value);
+                if(node==null)
                     queue.add(new Node(key,value));
-                }
-
-                else
+                else if(node.weight > value)
                 {
-
-                    Node node = findNodeInQueue(queue,key,value);
-                    if(node.weight > value)
-                    {
-                        queue.remove(key);
-                        queue.add(new Node(key,value));
-                    }
+                    queue.remove(node);
+                    queue.add(new Node(key,value));
                 }
             }
         }
@@ -59,9 +52,9 @@ public class SimulatedAnnealing{
     private Node findNodeInQueue(PriorityQueue<Node> queue, int key, double value) {
 
 
-        for(Node node: queue)
+        for(Node node : queue)
         {
-            if(node.node == key && node.weight == value)
+            if(node.node == key)
             {
                 return node;
             }
