@@ -29,8 +29,8 @@ public class Main {
         sc.tspUsingSimulatedAnnealing(adjacencyList, startTime);
         System.out.println();
         System.out.println("------------------Simulating TSP using Branch and Bound ------------------------");
-        //BranchAndBound bb = new BranchAndBound();
-        //bb.tsp();
+        BranchAndBound bb = new BranchAndBound();
+        bb.tsp();
     }
 
 
