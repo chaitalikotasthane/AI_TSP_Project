@@ -11,7 +11,7 @@ public class ReadInput {
 
         HashMap<Integer, HashMap<Integer,Double>> adjacencyList = new HashMap<>();
 
-        File dir = new File("./src/resources/Competition");
+        File dir = new File("./resources/Competition");
         File[] files = dir.listFiles();
         // Fetching all the files
         for (File file : files) {
