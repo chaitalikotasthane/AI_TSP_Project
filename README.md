@@ -31,8 +31,8 @@ Output generated per approach:
 
 # Code Packaging Details:
 
-1. Jar file: AI_TSP_Project\out\artifacts\AI_Project_jar
-	- Run using: java -cp AI_Project.jar Main
+1. Jar file: AI_TSP_Project/src/AI_PROJECT.jar
+	- Run using: java -cp AI_PROJECT.jar Main
 2. Zip file name: AI_TSP_Project.zip
-3. Starting class: AI_TSP_Project\src\Main.java
+3. Starting class: AI_TSP_Project/src/Main.java
 
