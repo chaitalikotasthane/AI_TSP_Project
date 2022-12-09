@@ -1,25 +1,14 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 public class BranchAndBound {
 
     private static int n;
 
-    /* private static double[][] adjMatrix = {
-        { Double.MAX_VALUE, 10, 15, 20 },
-        { 10, Double.MAX_VALUE, 35, 25 },
-        { 15, 35, Double.MAX_VALUE, 30 },
-        { 20, 25, 30, Double.MAX_VALUE }
-    }; */
+    private static double[][] adjMatrix = null;
 
-    double[][] adjMatrix = null;
-
-    public BranchAndBound( double[][] adjacencyMatrix) {
-       this.adjMatrix = adjacencyMatrix;
-       this.n = adjacencyMatrix.length;
+    public BranchAndBound(double[][] adjacencyMatrix) {
+        adjMatrix = adjacencyMatrix;
+        n = adjacencyMatrix.length;
     }
 
     private static class Pair<T1, T2> {
@@ -182,8 +171,6 @@ public class BranchAndBound {
      * @return Optimal cost
      */
     public double tsp() {
-
-
         PriorityQueue<Node> pq = new PriorityQueue<>(new CostComparator());
         List<Pair<Integer, Integer>> path = new ArrayList<>();
         Node root = createNode(0, 0, adjMatrix, 0, path);
