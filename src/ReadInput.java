@@ -3,19 +3,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ReadInput {
 
-    public static HashMap<Integer, HashMap<Integer,Double>> readCompetitionFiles() throws IOException {
+    public static HashMap<Integer, HashMap<Integer,Double>> readCompetitionFiles(String filename) throws IOException {
 
         HashMap<Integer, HashMap<Integer,Double>> adjacencyList = new HashMap<>();
 
-        File dir = new File("D:/CodingPracs/AI_TSP_Project/src/resources/Competion");
+        File dir = new File("./src/resources/Competition");
         File[] files = dir.listFiles();
         // Fetching all the files
         for (File file : files) {
             String name = file.getName();
-            if(file.isFile() && name.contains("tsp-problem-25-6-100-5-1")) {
+            if(file.isFile() && name.contains(filename)) {
                 BufferedReader inputStream = null;
                 String line;
                 int numOfLocations = 0;
@@ -58,5 +59,10 @@ public class ReadInput {
         map.put(v,cost);
         adj.put(u,map);
     }
+
+
+
+
+
 
 }

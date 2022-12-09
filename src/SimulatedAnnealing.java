@@ -108,10 +108,10 @@ public class SimulatedAnnealing{
 
 
     /*
-    Main function
-    Inputs:
-    adjacencyList
-    startTime
+        Main function
+        Inputs:
+        adjacencyList
+        startTime
      */
     public void tspUsingSimulatedAnnealing(HashMap<Integer, HashMap<Integer,Double>>
                                                      adjacencyList, long startTime)
@@ -178,14 +178,14 @@ public class SimulatedAnnealing{
         System.out.println("BestCost till now " +bestCost);
         System.out.println("BestTour till now: ");
         print(bestTourPath);
-        System.out.println("Total runtime in seconds: " + TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS));
+
     }
 
     /*
-    Function to calculate cost of a particular tour
-    Inputs:
-    tourPathSoFar - tourList
-    adjacencyList
+        Function to calculate cost of a particular tour
+        Inputs:
+        tourPathSoFar - tourList
+        adjacencyList
      */
     private Double calcTspCost(LinkedList<Integer> tourPathSoFar, HashMap<Integer, HashMap<Integer, Double>> adjacencyList) {
 
@@ -203,20 +203,20 @@ public class SimulatedAnnealing{
     }
 
     /*
-   Function to calculate acceptance probability
-   Inputs:
-   tourCostSoFar - costTillNow
-   tourCost - newCost
-   temperature - annealing temperature
+       Function to calculate acceptance probability
+       Inputs:
+       tourCostSoFar - costTillNow
+       tourCost - newCost
+       temperature - annealing temperature
     */
     private Double calculateAcceptanceProbability(Double tourCostSoFar, Double tourCost, Double temperature) {
         return Math.exp ((tourCostSoFar - tourCost)/ temperature);
     }
 
     /*
-   Utility function to print tour
-   Inputs:
-   bestTourPath - tourList
+       Utility function to print tour
+       Inputs:
+       bestTourPath - tourList
     */
     static void print(LinkedList<Integer> bestTourPath)
     {

@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class BranchAndBound {
@@ -11,16 +15,11 @@ public class BranchAndBound {
         { 20, 25, 30, Double.MAX_VALUE }
     }; */
 
-    private static double[][] adjMatrix = {
-        { Double.MAX_VALUE, 20, 15, 30, 45 },
-        { 20, Double.MAX_VALUE, 40, 10, 5 },
-        { 15, 40, Double.MAX_VALUE, 50, 15 },
-        { 30, 10, 50, Double.MAX_VALUE, 25 },
-        { 45, 5, 15, 25, Double.MAX_VALUE }
-    };
+    double[][] adjMatrix = null;
 
-    public BranchAndBound() {
-        n = adjMatrix.length;
+    public BranchAndBound( double[][] adjacencyMatrix) {
+       this.adjMatrix = adjacencyMatrix;
+       this.n = adjacencyMatrix.length;
     }
 
     private static class Pair<T1, T2> {
@@ -183,6 +182,8 @@ public class BranchAndBound {
      * @return Optimal cost
      */
     public double tsp() {
+
+
         PriorityQueue<Node> pq = new PriorityQueue<>(new CostComparator());
         List<Pair<Integer, Integer>> path = new ArrayList<>();
         Node root = createNode(0, 0, adjMatrix, 0, path);
@@ -206,12 +207,13 @@ public class BranchAndBound {
                     Node child = createNode(current, i, minCostNode.reducedMatrix, minCostNode.level + 1, minCostNode.path);
                     double calculatedCost = getReducedCost(child.reducedMatrix);
                     child.cost = minCostNode.cost + minCostNode.reducedMatrix[current][i] + calculatedCost;
-    
                     pq.add(child);
                 }
             }
         }
-        
+
         return 0;
     }
+
+
 }
