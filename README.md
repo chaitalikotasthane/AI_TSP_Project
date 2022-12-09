@@ -1,4 +1,4 @@
-Traveling Salesman Problem
+# Traveling Salesman Problem
 Given a set of cities and the distance between each pair of cities, it basically aims to find the minimum cost/ shortest possible route required to traverse all cities exactly once and return back to the starting point.
 
 We use the following concepts to approximate the solution for this problem:
@@ -28,3 +28,11 @@ Output generated per approach:
 	- Current tour
 	- Updated tour after 2-Opt
 	- Best cost so far and its corresponding tour
+
+# Code Packaging Details:
+
+1. Jar file: AI_TSP_Project\out\artifacts\AI_Project_jar
+	- Run using: java -cp AI_Project.jar Main
+2. Zip file name: AI_TSP_Project.zip
+3. Starting class: AI_TSP_Project\src\Main.java
+
