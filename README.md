@@ -20,11 +20,11 @@ Output generated per approach:
 
 1. Branch and Bound DFS
 
-	Minimum cost and its corresponding path
+	- Minimum cost and its corresponding path
 
 2. Stochastic Local Search
 	
-	Number of iterations
-	Current tour
-	Updated tour after 2-Opt
-	Best cost so far and its corresponding tour
+	- Number of iterations
+	- Current tour
+	- Updated tour after 2-Opt
+	- Best cost so far and its corresponding tour
